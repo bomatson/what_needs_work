@@ -2,11 +2,11 @@ require 'sinatra'
 require 'octokit'
 
 class GithubAPI
-  attr_accessor :response
 
   def self.search(language)
-    query = 'pull requests welcome'
-    @response = ::Octokit.search_code(query, language: language)
+    query = "pull requests welcome in:readme language:#{language}"
+    @response = ::Octokit.search_repos(query, page: 1, sort: 'stars')
+    @response.items[0..9]
   end
 end
 

@@ -10,10 +10,12 @@ describe GithubAPI do
   end
 
   describe '.search' do
-    subject { GithubAPI.search('ruby') }
+    let(:language) { 'ruby' }
 
-    it 'searches for open pull requests by language' do
-      expect(subject).to eq 1
+    subject { GithubAPI.search(language) }
+
+    it 'returns a list of 10 repos' do
+      expect(subject.count).to eq 10
     end
   end
 end
